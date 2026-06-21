@@ -101,7 +101,7 @@
 
     /* ===== Reset & Base ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; background: #0c1820; }
+    html { scroll-behavior: smooth; background: #0c1820; overflow-x: hidden; }
     body {
       font-family: var(--font-body);
       background: var(--bg);
@@ -449,6 +449,14 @@
         padding: 0; border-top: none;
       }
       .sidebar-tel { display: none; }
+      #h-line {
+        width: 36px; height: 36px;
+        border-radius: 50%;
+        padding: 0 !important;
+        font-size: 0 !important;
+        flex-shrink: 0; gap: 0;
+      }
+      #h-line svg { width: 20px; height: 20px; }
     }
     @media (max-width: 480px) {
       .sidebar-nav a { padding: 0 8px; }
@@ -886,8 +894,24 @@
     @media (max-width: 768px) {
       #reviewsGrid { grid-template-columns: 1fr 1fr; }
     }
-    @media (max-width: 480px) {
-      #reviewsGrid { grid-template-columns: 1fr; }
+    @media (max-width: 600px) {
+      #reviewsGrid {
+        display: flex;
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        gap: 12px;
+        padding-bottom: 20px;
+        margin-top: 24px;
+      }
+      #reviewsGrid::-webkit-scrollbar { display: none; }
+      #reviewsGrid > * {
+        flex: 0 0 82%;
+        scroll-snap-align: start;
+        min-height: 160px;
+      }
     }
 
     /* ===== BLOG ===== */
@@ -983,8 +1007,32 @@
       margin-top: 0;
     }
     @media (max-width: 600px) {
-      .blog-card { gap: 12px; }
-      .blog-card .date { width: 72px; font-size: 11px; }
+      .wall:not(.cms-loading) {
+        flex-direction: row;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        border-top: none;
+        padding-bottom: 20px;
+        gap: 12px;
+      }
+      .wall:not(.cms-loading)::-webkit-scrollbar { display: none; }
+      .wall:not(.cms-loading) .blog-card {
+        flex: 0 0 82%;
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        padding: 16px;
+        border-bottom: none;
+        border: 1px solid rgba(29,106,142,0.1);
+        border-radius: var(--r-md);
+        background: var(--white);
+        scroll-snap-align: start;
+        min-height: 110px;
+      }
+      .wall:not(.cms-loading) .blog-card .date { width: auto; font-size: 11px; }
+      .wall:not(.cms-loading) .blog-card .cap { flex: unset; font-size: 13px; }
       .blog-card .cta-lbl { display: none; }
     }
 
