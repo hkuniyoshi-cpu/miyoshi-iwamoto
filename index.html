@@ -316,15 +316,11 @@
     .sidebar-nav {
       display: flex;
       flex-direction: column;
-      gap: 18px;
+      gap: 8px;
       flex: 1;
-      overflow-y: auto;
-      overflow-x: hidden;
-      padding-bottom: 20px;
-      scrollbar-width: none;
-      -ms-overflow-style: none;
+      overflow: hidden;
+      padding-bottom: 16px;
     }
-    .sidebar-nav::-webkit-scrollbar { display: none; }
     .sidebar-nav a {
       font-size: 13px;
       font-weight: 500;
@@ -359,6 +355,14 @@
       border-top: 1px solid rgba(29,106,142,0.08);
       background: var(--white);
     }
+    .sidebar-reserve-label {
+      display: block;
+      font-size: 9px;
+      letter-spacing: 0.06em;
+      color: var(--muted);
+      text-align: center;
+      opacity: 0.75;
+    }
     .sidebar-tel {
       display: block;
       text-decoration: none;
@@ -377,6 +381,8 @@
       color: var(--ink);
     }
     @media (max-width: 860px) {
+      body { margin-left: 0; padding-top: 96px; }
+      section[id] { scroll-margin-top: 96px; }
       #sidebar {
         width: 100%; height: auto;
         flex-direction: row; align-items: center;
@@ -391,6 +397,7 @@
       .sidebar-logo .name { font-size: 15px; line-height: 1.2; }
       .sidebar-logo .sub { display: none; }
       .sidebar-nav { display: none; }
+      .sidebar-reserve-label { display: none; }
       .sidebar-bottom {
         position: static; bottom: auto; left: auto; right: auto;
         margin-top: 0; padding-top: 0; border-top: none;
@@ -402,6 +409,48 @@
     }
     @media (max-width: 480px) {
       .sidebar-tel { display: none; }
+    }
+
+    /* ===== MOBILE TABS ===== */
+    .mobile-tabs { display: none; }
+    @media (max-width: 860px) {
+      .mobile-tabs {
+        display: flex;
+        position: fixed;
+        top: 60px;
+        left: 0; right: 0;
+        height: 36px;
+        background: var(--white);
+        border-bottom: 1px solid rgba(29,106,142,0.08);
+        overflow-x: auto;
+        overflow-y: hidden;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+        z-index: 850;
+        padding: 0 8px;
+        gap: 0;
+        box-shadow: 0 2px 6px rgba(26,45,58,0.05);
+      }
+      .mobile-tabs::-webkit-scrollbar { display: none; }
+      .mobile-tabs .m-tab {
+        flex: 0 0 auto;
+        font-size: 11px;
+        font-weight: 500;
+        letter-spacing: 0.04em;
+        color: var(--ink);
+        text-decoration: none;
+        padding: 0 10px;
+        height: 36px;
+        line-height: 36px;
+        white-space: nowrap;
+        border-bottom: 2px solid transparent;
+        transition: color 0.2s, border-color 0.2s;
+      }
+      .mobile-tabs .m-tab:hover,
+      .mobile-tabs .m-tab.active {
+        color: var(--accent);
+        border-bottom-color: var(--accent);
+      }
     }
 
     /* ===== HERO ===== */
@@ -1851,12 +1900,26 @@
       <small>電話受付</small>
       <span id="sidebar-tel-num">0824-63-7892</span>
     </a>
+    <small class="sidebar-reserve-label">ご予約・お問い合わせはこちら</small>
     <a href="https://line.me/ti/p/@536pqpqx" target="_blank" rel="noopener" class="btn btn-line" id="h-line" style="font-size:12px;padding:9px 16px;">
       <svg width="13" height="13" viewBox="0 0 24 24" fill="currentColor"><path d="M19.365 9.863c.349 0 .63.285.63.631 0 .345-.281.63-.63.63H17.61v1.125h1.755c.349 0 .63.283.63.63 0 .344-.281.629-.63.629h-2.386c-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.63-.63h2.386c.346 0 .627.285.627.63 0 .349-.281.63-.63.63H17.61v1.125h1.755zm-3.855 3.016c0 .27-.174.51-.432.596-.064.021-.133.031-.199.031-.211 0-.391-.09-.51-.25l-2.443-3.317v2.94c0 .344-.279.629-.631.629-.346 0-.626-.285-.626-.629V8.108c0-.27.173-.51.43-.595.06-.023.136-.033.194-.033.195 0 .375.104.495.254l2.462 3.33V8.108c0-.345.282-.63.63-.63.345 0 .63.285.63.63v4.771zm-5.741 0c0 .344-.282.629-.631.629-.345 0-.627-.285-.627-.629V8.108c0-.345.282-.63.627-.63.349 0 .631.285.631.63v4.771zm-2.466.629H4.917c-.345 0-.63-.285-.63-.629V8.108c0-.345.285-.63.63-.63.348 0 .63.285.63.63v4.141h1.756c.348 0 .629.283.629.63 0 .344-.281.629-.629.629M24 10.314C24 4.943 18.615.572 12 .572S0 4.943 0 10.314c0 4.811 4.27 8.842 10.035 9.608.391.082.923.258 1.058.59.12.301.079.766.038 1.08l-.164 1.02c-.045.301-.24 1.186 1.049.645 1.291-.539 6.916-4.078 9.436-6.975C23.176 14.393 24 12.458 24 10.314"/></svg>
       LINE 予約
     </a>
   </div>
 </aside>
+
+<!-- ===== MOBILE TABS ===== -->
+<nav class="mobile-tabs" id="mobileTabNav" aria-label="セクションナビゲーション">
+  <a href="#about" class="m-tab">当院について</a>
+  <a href="#menu" class="m-tab">施術案内</a>
+  <a href="#features" class="m-tab">こだわり</a>
+  <a href="#forYou" class="m-tab">こんな方へ</a>
+  <a href="#reviews" class="m-tab">患者様の声</a>
+  <a href="#blog" class="m-tab">お知らせ</a>
+  <a href="#access" class="m-tab">アクセス</a>
+  <a href="#datsumou" class="m-tab">セルフ脱毛</a>
+  <a href="#glove" class="m-tab">グローブ</a>
+</nav>
 
 <!-- ===== HERO ===== -->
 <section id="hero" aria-label="ヒーロー">
@@ -2518,6 +2581,10 @@
 <script>
 'use strict';
 
+/* ===== ページトップから開始 ===== */
+if ('scrollRestoration' in history) history.scrollRestoration = 'manual';
+window.scrollTo(0, 0);
+
 /* ===== GAS URL ===== */
 const GAS_URL = 'https://script.google.com/macros/s/AKfycbxUwihW8aNDP76Q6m3pU-FQErcWdZW39btbKklAQ1mjaikfJ6UDTV_s7yxn5y3P2YZg/exec';
 
@@ -2965,19 +3032,27 @@ document.addEventListener('DOMContentLoaded', () => {
   });
   initFAQ();
 
-  /* ===== Scrollspy: sidebar nav active ===== */
+  /* ===== Scrollspy: sidebar nav + mobile tabs active ===== */
   const navLinks = document.querySelectorAll('.sidebar-nav a[href^="#"]');
-  const sectionIds = [...navLinks].map(a => a.getAttribute('href').slice(1));
-  const sections = sectionIds.map(id => document.getElementById(id)).filter(Boolean);
+  const tabLinks = document.querySelectorAll('.mobile-tabs .m-tab[href^="#"]');
+  const allSpyIds = [...new Set([
+    ...[...navLinks].map(a => a.getAttribute('href').slice(1)),
+    ...[...tabLinks].map(a => a.getAttribute('href').slice(1))
+  ])];
+  const sections = allSpyIds.map(id => document.getElementById(id)).filter(Boolean);
 
   const spy = new IntersectionObserver(entries => {
     entries.forEach(e => {
+      if (!e.isIntersecting) return;
       const id = e.target.id;
+      navLinks.forEach(a => a.classList.remove('active'));
+      tabLinks.forEach(a => a.classList.remove('active'));
       const link = document.querySelector(`.sidebar-nav a[href="#${id}"]`);
-      if (!link) return;
-      if (e.isIntersecting) {
-        navLinks.forEach(a => a.classList.remove('active'));
-        link.classList.add('active');
+      if (link) link.classList.add('active');
+      const tab = document.querySelector(`.mobile-tabs .m-tab[href="#${id}"]`);
+      if (tab) {
+        tab.classList.add('active');
+        tab.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
       }
     });
   }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
