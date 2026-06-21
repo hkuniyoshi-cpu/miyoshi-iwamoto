@@ -190,9 +190,18 @@ function getSlug() {
 function findBySlug(items, slug) {
   if (!Array.isArray(items) || !slug) return null;
   return items.find(function(b) {
-    if (!b || !b.url) return false;
-    return b.url.indexOf('/blog/' + slug + '/') !== -1
-        || b.url.indexOf('/blog/' + slug) !== -1;
+    if (!b) return false;
+    // ブログ個別URL列が設定されている場合はURLで照合
+    if (b.url && (
+      b.url.indexOf('/blog/' + slug + '/') !== -1 ||
+      b.url.indexOf('/blog/' + slug) !== -1
+    )) return true;
+    // URL未設定の場合は日付で照合（Make が URL を書かなかった場合）
+    if (b.date) {
+      const d = String(b.date).replace(/[\/\.]/g, '-').replace(/[^0-9-]/g, '');
+      if (d === slug || d.indexOf(slug) === 0 || slug.indexOf(d) === 0) return true;
+    }
+    return false;
   }) || null;
 }
 
