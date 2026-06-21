@@ -187,19 +187,28 @@ function getSlug() {
   return m ? m[1] : '';
 }
 
-function findBySlug(items, slug) {
-  if (!Array.isArray(items) || !slug) return null;
+function getN() {
+  const params = new URLSearchParams(location.search);
+  const n = params.get('n');
+  return (n !== null && n !== '') ? parseInt(n, 10) : -1;
+}
+
+function findBySlug(items, slug, n) {
+  if (!Array.isArray(items)) return null;
+  // ① インデックス優先（同日・同URL記事が複数ある場合のtiebreaker）
+  if (n >= 0 && n < items.length && items[n]) return items[n];
+  if (!slug) return null;
+  // ② URLスラッグで照合
   return items.find(function(b) {
     if (!b) return false;
-    // ブログ個別URL列が設定されている場合はURLで照合
     if (b.url && (
       b.url.indexOf('/blog/' + slug + '/') !== -1 ||
       b.url.indexOf('/blog/' + slug) !== -1
     )) return true;
-    // URL未設定の場合は日付で照合（Make が URL を書かなかった場合）
+    // ③ 日付完全一致のみ（slug.indexOf(d)は同日別記事と誤マッチするため除外）
     if (b.date) {
       const d = String(b.date).replace(/[\/\.]/g, '-').replace(/[^0-9-]/g, '');
-      if (d === slug || d.indexOf(slug) === 0 || slug.indexOf(d) === 0) return true;
+      if (d === slug) return true;
     }
     return false;
   }) || null;
@@ -299,7 +308,8 @@ function render(item) {
 
 (function init() {
   const slug = getSlug();
-  if (!slug) {
+  const n    = getN();
+  if (!slug && n < 0) {
     render(null);
     return;
   }
@@ -307,7 +317,7 @@ function render(item) {
   fetch(GAS_URL + (GAS_URL.indexOf('?') >= 0 ? '&' : '?') + 'blog_all=1')
     .then(function(r) { return r.json(); })
     .then(function(data) {
-      const item = findBySlug(data && data.blog, slug);
+      const item = findBySlug(data && data.blog, slug, n);
       render(item);
     })
     .catch(function(err) {
@@ -315,7 +325,7 @@ function render(item) {
       fetch(GAS_URL)
         .then(function(r) { return r.json(); })
         .then(function(data) {
-          const item = findBySlug(data && data.blog, slug);
+          const item = findBySlug(data && data.blog, slug, n);
           render(item);
         })
         .catch(function() { render(null); });
