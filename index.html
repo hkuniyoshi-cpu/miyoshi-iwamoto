@@ -1189,7 +1189,7 @@
         margin: 24px 20px 0;
         gap: 14px;
       }
-      .sns-handle { font-size: 15px; }
+      .sns-handle { font-size: 15px; overflow-wrap: anywhere; }
     }
 
     /* ===== RESERVATION ===== */
@@ -2347,7 +2347,7 @@
           </svg>
         </div>
         <div>
-          <div class="sns-handle">@miyoshi_iwamoto_sekkotsuin</div>
+          <div class="sns-handle">@miyoshi_<wbr>iwamoto_<wbr>sekkotsuin</div>
           <div class="sns-sub">Instagramで発信中 — フォローはこちら</div>
         </div>
       </a>
@@ -2942,7 +2942,7 @@ function applySNS(sns) {
   }
   if (sns.instagramHandle) {
     const el = document.querySelector('#sns .sns-handle');
-    if (el) el.textContent = sns.instagramHandle;
+    if (el) el.innerHTML = sns.instagramHandle.replace(/_/g, '_<wbr>');
   }
 }
 
