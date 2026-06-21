@@ -2509,15 +2509,18 @@ function applyHero(hero) {
     const btn = document.getElementById('h-line');
     if (btn) btn.href = hero.lineUrl;
   }
-  // Photos
+  // Photos — GAS returns hero.photos[] array
   const cells = document.querySelectorAll('#h-photos .cell');
-  const imgs = [hero.img1, hero.img2, hero.img3, hero.img4];
+  const photos = Array.isArray(hero.photos) ? hero.photos : [];
+  const imgs = photos.length > 0
+    ? photos.map(p => p.image || '')
+    : [hero.img1, hero.img2, hero.img3, hero.img4];
   cells.forEach((cell, i) => {
     cell.classList.remove('cms-loading');
     if (imgs[i]) {
       const img = document.createElement('img');
       img.src = driveImg(imgs[i]);
-      img.alt = '';
+      img.alt = photos[i] ? esc(photos[i].caption || '') : '';
       img.loading = 'lazy';
       cell.appendChild(img);
     }
