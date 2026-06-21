@@ -1839,7 +1839,7 @@
   </a>
   <nav class="sidebar-nav">
     <a href="#about">当院について</a>
-    <a href="#menu">施術メニュー（料金表）</a>
+    <a href="#menu">施術案内</a>
     <a href="#features">こだわり</a>
     <a href="#forYou">こんな方へ</a>
     <a href="#reviews">患者様の声</a>
@@ -2931,7 +2931,7 @@ fetch(GAS_URL)
   });
 
 
-/* ===== Sidebar/footer color sync (白い長方形対策) ===== */
+/* ===== Sidebar clip at footer boundary (白い長方形対策) ===== */
 (function() {
   function sync() {
     var notice = document.querySelector('.partner-notice') || document.getElementById('footer');
@@ -2939,20 +2939,18 @@ fetch(GAS_URL)
     if (!sidebar || !notice) return;
     var top = notice.getBoundingClientRect().top;
     var vh = window.innerHeight;
-    /* フッター上端より160px手前から暗くする → nav〜sidebar-bottom間の空白も覆う */
-    var adjusted = top - 160;
-    if (adjusted < vh) {
-      var pct = Math.max(0, Math.round(adjusted / vh * 100));
-      sidebar.style.background = 'linear-gradient(to bottom, #fff ' + pct + '%, #0c1820 ' + pct + '%)';
+    if (top < vh) {
+      /* clip-path でフッター上端より下のサイドバーを切り取る → 白い長方形が見えなくなる */
+      var clipBottom = Math.max(0, vh - top);
+      sidebar.style.clipPath = 'inset(0 0 ' + clipBottom + 'px 0)';
       sidebar.classList.add('at-footer');
     } else {
-      sidebar.style.background = '';
+      sidebar.style.clipPath = '';
       sidebar.classList.remove('at-footer');
     }
   }
   window.addEventListener('scroll', sync, { passive: true });
   window.addEventListener('load', sync);
-  /* スクリプト実行直後にも即呼び出し（ページ復元時のスクロール位置に対応） */
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', sync);
   } else {
