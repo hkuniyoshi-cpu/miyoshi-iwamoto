@@ -396,21 +396,22 @@
       display: grid;
       grid-template-columns: 58% 42%;
       grid-template-rows: 62% 38%;
-      gap: 10px;
-      padding: 10px 10px 0 10px;
+      gap: 4px;
+      padding: 0;
+      background: #fff;
     }
     .hero-grid .cell:first-child {
       grid-row: 1 / 3;
     }
     .hero-grid .cell {
-      border-radius: 18px;
+      border-radius: 0;
       overflow: hidden;
       position: relative;
-      background: #2a3e4d;
+      background: #d8e6ef;
     }
     .hero-grid .cell.cms-loading {
       animation: shimmer 1.6s infinite linear;
-      background: linear-gradient(90deg, #1e3040 25%, #2a4055 50%, #1e3040 75%);
+      background: linear-gradient(90deg, #c8dde9 25%, #daeaf4 50%, #c8dde9 75%);
       background-size: 800px 100%;
     }
     .hero-grid .cell img {
@@ -433,8 +434,7 @@
     @media (max-width: 860px) {
       #hero { min-height: 65svh; }
       .hero-vert-label { display: none; }
-      .hero-grid { gap: 6px; padding: 6px; }
-      .hero-grid .cell { border-radius: 12px; }
+      .hero-grid { gap: 3px; }
     }
 
     /* ===== ABOUT ===== */
