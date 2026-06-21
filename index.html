@@ -2674,7 +2674,6 @@ function applyBlog(items) {
     const tagClose = blogHref ? '</a>' : '</article>';
     return `${tagOpen}
       <span class="date">${b.date ? esc(fmtDate(b.date)) : ''}</span>
-      <span class="blog-tag">BLOG</span>
       <p class="cap">${esc(shortTitle)}</p>
       <span class="cta-lbl">→</span>
     ${tagClose}`;
