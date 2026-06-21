@@ -110,6 +110,7 @@
       font-size: 15px;
       -webkit-font-smoothing: antialiased;
       margin-left: var(--sidebar-w);
+      word-break: auto-phrase;
     }
     @media (max-width: 860px) {
       body { margin-left: 0; padding-top: 60px; }
@@ -286,7 +287,7 @@
       z-index: 900;
       display: flex;
       flex-direction: column;
-      padding: 48px 36px 36px;
+      padding: 48px 36px 150px;
       border-right: 1px solid rgba(29,106,142,0.07);
       box-shadow: 2px 0 24px rgba(26,45,58,0.05);
       overflow-y: auto;
@@ -315,7 +316,7 @@
     .sidebar-nav {
       display: flex;
       flex-direction: column;
-      gap: 26px;
+      gap: 18px;
     }
     .sidebar-nav a {
       font-size: 13px;
@@ -343,14 +344,23 @@
       vertical-align: middle;
     }
     .sidebar-bottom {
-      margin-top: auto;
+      position: absolute;
+      bottom: 36px;
+      left: 36px;
+      right: 36px;
       padding-top: 28px;
       display: flex;
       flex-direction: column;
       gap: 10px;
       border-top: 1px solid rgba(29,106,142,0.08);
-      flex-shrink: 0;
+      background: var(--white);
     }
+    #sidebar.at-footer .sidebar-bottom {
+      background: #0c1820;
+      border-top-color: rgba(255,255,255,0.06);
+    }
+    #sidebar.at-footer .sidebar-tel small { color: rgba(255,255,255,0.4); }
+    #sidebar.at-footer .sidebar-tel span { color: rgba(255,255,255,0.85); }
     .sidebar-tel {
       display: block;
       text-decoration: none;
@@ -384,9 +394,10 @@
       .sidebar-logo .sub { display: none; }
       .sidebar-nav { display: none; }
       .sidebar-bottom {
+        position: static; bottom: auto; left: auto; right: auto;
         margin-top: 0; padding-top: 0; border-top: none;
         flex-direction: row; margin-left: auto;
-        gap: 8px; align-items: center;
+        gap: 8px; align-items: center; background: transparent;
       }
       .sidebar-tel small { display: none; }
       .sidebar-tel span { font-size: 12px; }
@@ -576,11 +587,17 @@
       color: var(--muted);
     }
     .menu-card .m-title {
+      display: inline-block;
       font-weight: 700;
-      font-size: 15px;
-      margin-bottom: 8px;
-      color: var(--ink);
+      font-size: 12px;
+      letter-spacing: .08em;
+      color: var(--accent);
+      background: rgba(29,106,142,0.08);
+      border-radius: 4px;
+      padding: 3px 10px;
+      margin-bottom: 10px;
     }
+    .menu-card .m-title:empty { display: none; }
     .menu-card .m-desc {
       font-size: 13px;
       color: var(--muted);
@@ -1780,9 +1797,39 @@
     @media (max-width: 860px) {
       .partner-notice { margin-left: 0; }
     }
+
+    /* ===== Page Loader ===== */
+    #page-loader {
+      position: fixed; inset: 0;
+      background: var(--bg, #F5F8FA);
+      z-index: 9999;
+      display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 18px;
+      transition: opacity .6s ease, visibility .6s ease;
+    }
+    #page-loader.fade-out { opacity: 0; visibility: hidden; pointer-events: none; }
+    .loader-stamp { width: 88px; height: 88px; animation: ld-stamp .7s cubic-bezier(.22,1,.36,1) both, ld-pulse 2.4s ease-in-out .7s infinite; }
+    .loader-name { font-size: 20px; letter-spacing: .18em; color: var(--ink, #1A2D3A); animation: ld-rise .5s ease .25s both; font-family: var(--font-display); }
+    .loader-dots { display: flex; gap: 7px; animation: ld-rise .5s ease .4s both; }
+    .loader-dots span { width: 6px; height: 6px; border-radius: 50%; background: var(--muted, #7A8C99); animation: ld-bounce .9s ease-in-out infinite; }
+    .loader-dots span:nth-child(2) { animation-delay: .18s; }
+    .loader-dots span:nth-child(3) { animation-delay: .36s; }
+    @keyframes ld-stamp { from { opacity:0; transform:rotate(-10deg) scale(.6); } to { opacity:1; transform:rotate(0) scale(1); } }
+    @keyframes ld-pulse { 0%,100% { transform:scale(1) rotate(0); } 50% { transform:scale(1.04) rotate(1.5deg); } }
+    @keyframes ld-rise { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes ld-bounce { 0%,80%,100% { transform:translateY(0); opacity:.35; } 40% { transform:translateY(-9px); opacity:1; } }
   </style>
 </head>
 <body>
+
+<div id="page-loader" aria-hidden="true">
+  <svg class="loader-stamp" viewBox="0 0 88 88" xmlns="http://www.w3.org/2000/svg">
+    <circle cx="44" cy="44" r="42" fill="#1A2D3A"/>
+    <circle cx="44" cy="44" r="34" fill="none" stroke="#F5F8FA" stroke-width="1" stroke-dasharray="2.8 2"/>
+    <text x="44" y="61" text-anchor="middle" font-family="serif" font-size="42" font-weight="700" fill="#F5F8FA">接</text>
+  </svg>
+  <p class="loader-name">三次いわもと接骨院</p>
+  <div class="loader-dots" aria-label="読み込み中"><span></span><span></span><span></span></div>
+</div>
 
 <!-- ===== SIDEBAR ===== -->
 <aside id="sidebar" role="navigation" aria-label="サイトナビゲーション">
@@ -1844,9 +1891,7 @@
       <div class="about-card reveal">
         <div class="about-director">
           <div class="director-avatar" id="director-avatar">
-            <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
-              <path d="M12 12c2.7 0 4.8-2.1 4.8-4.8S14.7 2.4 12 2.4 7.2 4.5 7.2 7.2 9.3 12 12 12zm0 2.4c-3.2 0-9.6 1.6-9.6 4.8v2.4h19.2v-2.4c0-3.2-6.4-4.8-9.6-4.8z"/>
-            </svg>
+            <img src="/岩本院長.png" alt="院長 岩本 雄" loading="eager">
           </div>
           <div>
             <div class="director-name" id="director-name">院長　岩本 雄</div>
@@ -1864,7 +1909,7 @@
   <div class="wrap">
     <div class="reveal">
       <span class="section-label">MENU</span>
-      <h2 class="section-title">施術案内・料金</h2>
+      <h2 class="section-title">施術案内</h2>
       <div class="section-divider"></div>
       <p class="section-lead">症状・目的に合わせたメニューをご用意しています。初回はカウンセリング込みでご対応します。</p>
     </div>
@@ -2440,7 +2485,7 @@
       <nav class="footer-nav" aria-label="フッターナビゲーション">
         <div class="footer-nav-title">Menu</div>
         <ul>
-          <li><a href="#menu">施術案内・料金</a></li>
+          <li><a href="#menu">施術案内</a></li>
           <li><a href="#features">当院のこだわり</a></li>
           <li><a href="#forYou">こんな方へ</a></li>
           <li><a href="#reviews">患者様の声</a></li>
@@ -2619,7 +2664,7 @@ function applyMenu(items) {
   grid.innerHTML = items.map(m => `
     <div class="menu-card reveal">
       ${m.price ? `<div class="price">${esc(m.price)}<small> ${esc(m.unit || '')}</small></div>` : ''}
-      <div class="m-title">${esc(m.title || '')}</div>
+      <div class="m-title">${esc(m.name || '')}</div>
       ${m.desc ? `<div class="m-desc">${esc(m.desc)}</div>` : ''}
     </div>
   `).join('');
@@ -2830,26 +2875,90 @@ function applyCTA(cta) {
   }
 }
 
+/* ===== Page Loader ===== */
+const _loaderStart = Date.now();
+function _hideLoader() {
+  const el = document.getElementById('page-loader');
+  if (!el || el.dataset.done) return;
+  el.dataset.done = '1';
+  const wait = Math.max(0, 700 - (Date.now() - _loaderStart));
+  setTimeout(() => {
+    el.classList.add('fade-out');
+    setTimeout(() => el.remove(), 650);
+  }, wait);
+}
+
 /* ===== CMS Fetch ===== */
+const _CMS_KEY = 'cms_miyoshi_iwamoto_v1';
+const _CMS_TTL = 5 * 60 * 1000; // 5分キャッシュ
+
+function applyAll(data) {
+  if (data.settings) applySettings(data.settings);
+  if (data.hero)     applyHero(data.hero);
+  if (data.about)    applyAbout(data.about);
+  if (data.menu)     applyMenu(data.menu);
+  if (data.features) applyFeatures(data.features);
+  if (data.forYou)   applyForYou(data.forYou);
+  if (data.reviews)  applyReviews(data.reviews);
+  if (data.blog)     applyBlog(data.blog);
+  if (data.access)   applyAccess(data.access);
+  if (data.sns)      applySNS(data.sns);
+  if (data.delivery) applyDelivery(data.delivery);
+  if (data.faq)      applyFAQ(data.faq);
+  if (data.cta)      applyCTA(data.cta);
+}
+
+// キャッシュ即時反映（2回目以降のアクセスでCMSフラッシュを防ぐ）
+try {
+  const c = localStorage.getItem(_CMS_KEY);
+  if (c) {
+    const { data, ts } = JSON.parse(c);
+    if (Date.now() - ts < _CMS_TTL) { applyAll(data); _hideLoader(); }
+  }
+} catch (e) {}
+
+// 常に最新データをバックグラウンド取得
 fetch(GAS_URL)
   .then(r => r.json())
   .then(data => {
-    if (data.settings) applySettings(data.settings);
-    if (data.hero)     applyHero(data.hero);
-    if (data.about)    applyAbout(data.about);
-    if (data.menu)     applyMenu(data.menu);
-    if (data.features) applyFeatures(data.features);
-    if (data.forYou)   applyForYou(data.forYou);
-    if (data.reviews)  applyReviews(data.reviews);
-    if (data.blog)     applyBlog(data.blog);
-    if (data.access)   applyAccess(data.access);
-    if (data.sns)      applySNS(data.sns);
-    if (data.delivery) applyDelivery(data.delivery);
-    if (data.faq)      applyFAQ(data.faq);
-    if (data.cta)      applyCTA(data.cta);
+    applyAll(data);
+    _hideLoader();
+    try { localStorage.setItem(_CMS_KEY, JSON.stringify({ data, ts: Date.now() })); } catch (e) {}
   })
-  .catch(err => console.warn('CMS fetch error:', err));
+  .catch(err => {
+    console.warn('CMS fetch error:', err);
+    _hideLoader();
+  });
 
+
+/* ===== Sidebar/footer color sync (白い長方形対策) ===== */
+(function() {
+  function sync() {
+    var notice = document.querySelector('.partner-notice') || document.getElementById('footer');
+    var sidebar = document.getElementById('sidebar');
+    if (!sidebar || !notice) return;
+    var top = notice.getBoundingClientRect().top;
+    var vh = window.innerHeight;
+    /* フッター上端より160px手前から暗くする → nav〜sidebar-bottom間の空白も覆う */
+    var adjusted = top - 160;
+    if (adjusted < vh) {
+      var pct = Math.max(0, Math.round(adjusted / vh * 100));
+      sidebar.style.background = 'linear-gradient(to bottom, #fff ' + pct + '%, #0c1820 ' + pct + '%)';
+      sidebar.classList.add('at-footer');
+    } else {
+      sidebar.style.background = '';
+      sidebar.classList.remove('at-footer');
+    }
+  }
+  window.addEventListener('scroll', sync, { passive: true });
+  window.addEventListener('load', sync);
+  /* スクリプト実行直後にも即呼び出し（ページ復元時のスクロール位置に対応） */
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', sync);
+  } else {
+    sync();
+  }
+})();
 
 /* ===== FAQ accordion ===== */
 function initFAQ() {
