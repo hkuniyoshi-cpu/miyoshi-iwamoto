@@ -2712,7 +2712,9 @@ function applyBlog(items) {
       rawTitle = `${fmtDate(b.date)} の投稿`;
     }
     const shortTitle = rawTitle.length > 60 ? rawTitle.slice(0, 60) + '…' : rawTitle;
-    const blogHref = b.date ? `/blog/?post=${b.date}` : (b.url || null);
+    const slugMatch = (b.url || '').match(/\/blog\/([^\/\?#]+)/);
+    const postSlug  = slugMatch ? slugMatch[1] : (b.date || '');
+    const blogHref  = postSlug ? `/blog/?post=${postSlug}` : null;
     const tagOpen  = blogHref
       ? `<a href="${blogHref}" class="e blog-card reveal">`
       : `<article class="e blog-card reveal" role="button" tabindex="0" data-idx="${i}">`;
