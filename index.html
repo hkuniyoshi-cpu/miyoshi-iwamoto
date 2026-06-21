@@ -2054,7 +2054,6 @@
   <div class="wrap">
     <div class="blog-header reveal">
       <div>
-        <span class="section-label">BLOG</span>
         <h2 class="section-title">お知らせ</h2>
       </div>
       <a href="/blog/" class="btn btn-outline">すべて見る</a>
@@ -2676,9 +2675,7 @@ function applyBlog(items) {
       rawTitle = `${fmtDate(b.date)} の投稿`;
     }
     const shortTitle = rawTitle.length > 60 ? rawTitle.slice(0, 60) + '…' : rawTitle;
-    const blogHref = (b.url && b.url.includes('/blog/'))
-      ? b.url
-      : (b.date ? `/blog/${b.date}/` : null);
+    const blogHref = b.date ? `/blog/?post=${b.date}` : (b.url || null);
     const tagOpen  = blogHref
       ? `<a href="${blogHref}" class="e blog-card reveal">`
       : `<article class="e blog-card reveal" role="button" tabindex="0" data-idx="${i}">`;
