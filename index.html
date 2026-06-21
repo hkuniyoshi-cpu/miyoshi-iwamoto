@@ -6,6 +6,8 @@
   <title>三次いわもと接骨院 | 骨盤矯正・整体 | 広島県三次市</title>
   <meta name="description" content="広島県三次市の接骨院。骨盤矯正・整体・産後矯正・EMS（楽トレ）に対応。トップアスリートも支持する本格施術。LINE予約受付中。TEL 0824-63-7892。">
   <link rel="canonical" href="https://miyoshi-iwamoto.search-mania.net/">
+  <link rel="icon" href="./favicon.svg" type="image/svg+xml">
+  <meta name="google-site-verification" content="LZg90oxtbqi0v6An7Fc0uO3ufbqcmW4_Qp9mCI2u6wk" />
   <meta property="og:title" content="三次いわもと接骨院 | 骨盤矯正・整体 | 広島県三次市">
   <meta property="og:description" content="広島県三次市の接骨院。骨盤矯正・整体・産後矯正・EMS（楽トレ）に対応。LINE予約受付中。">
   <meta property="og:url" content="https://miyoshi-iwamoto.search-mania.net/">
@@ -1146,6 +1148,47 @@
     }
     .faq-item.open .faq-a { display: block; }
 
+    /* FAQ カテゴリー区切り */
+    .faq-category-label {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      padding: 6px 0 4px;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      color: var(--accent);
+    }
+    .faq-category-label::before,
+    .faq-category-label::after {
+      content: '';
+      flex: 1;
+      height: 1px;
+      background: rgba(29,106,142,0.15);
+    }
+    .faq-category-label.glove {
+      color: #b48a00;
+      margin-top: 8px;
+    }
+    .faq-category-label.glove::before,
+    .faq-category-label.glove::after {
+      background: rgba(180,138,0,0.2);
+    }
+    /* グローブ販売 FAQ */
+    .faq-item--glove {
+      border-color: rgba(180,138,0,0.25);
+      background: #fffdf0;
+    }
+    .faq-item--glove .faq-q .q-badge {
+      background: #fef3c7;
+      color: #92640a;
+    }
+    .faq-item--glove .faq-q .arrow {
+      color: #92640a;
+      background: #fef3c7;
+    }
+    .faq-item--glove .faq-q:hover { background: #fefce8; }
+
     /* ===== CTA ===== */
     #cta {
       padding: 100px 0;
@@ -2235,6 +2278,7 @@
       <div class="section-divider" style="margin: 20px auto 0;"></div>
     </div>
     <div class="faq-list" id="faqList">
+      <div class="faq-category-label reveal">🏥 接骨院・セルフ脱毛について</div>
       <div class="faq-item reveal">
         <div class="faq-q" tabindex="0" role="button" aria-expanded="false">
           <span class="q-badge">Q</span>
@@ -2282,6 +2326,24 @@
           <span class="arrow">▼</span>
         </div>
         <div class="faq-a">前日までにお電話またはLINEでご連絡ください。急な場合もお早めにご連絡いただけますと助かります。</div>
+      </div>
+
+      <div class="faq-category-label glove reveal">🥊 Glove Studio Gan ボクシンググローブ販売について</div>
+      <div class="faq-item faq-item--glove reveal">
+        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">
+          <span class="q-badge">Q</span>
+          <span>グローブはどこで買えますか？</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">グローブ販売は完全受注対応です。当院（広島県三次市東酒屋町381-2-101）にて直接お申し込みいただくか、お電話またはLINEでご相談ください。オンライン注文も受け付けています。</div>
+      </div>
+      <div class="faq-item faq-item--glove reveal">
+        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">
+          <span class="q-badge">Q</span>
+          <span>グローブの問い合わせはどこにすればよいですか？</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">グローブに関するお問い合わせは、院内に掲示の専用QRコードよりLINEでご連絡いただくか、電話（0824-63-7892）にてお気軽にどうぞ。※グローブ販売はオーナー個人の活動です。接骨院の施術とは別サービスとなります。</div>
       </div>
     </div>
   </div>
