@@ -2394,7 +2394,7 @@
           <span>グローブの問い合わせはどこにすればよいですか？</span>
           <span class="arrow">▼</span>
         </div>
-        <div class="faq-a">グローブに関するお問い合わせは、院内に掲示の専用QRコードよりLINEでご連絡いただくか、電話（0824-63-7892）にてお気軽にどうぞ。※グローブ販売はオーナー個人の活動です。接骨院の施術とは別サービスとなります。</div>
+        <div class="faq-a">お電話かLINEよりお気軽にご連絡ください。<br><br>📞 <a href="tel:0824-63-7892" style="color:inherit;font-weight:600;">0824-63-7892</a><br>💬 <a href="https://line.me/R/ti/p/@943mndqk" target="_blank" rel="noopener" style="color:inherit;font-weight:600;">LINE公式アカウントはこちら →</a><br><br><small style="opacity:.7;">※グローブ販売はオーナー個人の活動です。接骨院の施術とは別サービスとなります。</small></div>
       </div>
     </div>
   </div>
@@ -2714,7 +2714,7 @@ function applyBlog(items) {
     const shortTitle = rawTitle.length > 60 ? rawTitle.slice(0, 60) + '…' : rawTitle;
     const slugMatch = (b.url || '').match(/\/blog\/([^\/\?#]+)/);
     const postSlug  = slugMatch ? slugMatch[1] : (b.date || '');
-    const blogHref  = postSlug ? `/blog/?post=${postSlug}` : null;
+    const blogHref  = postSlug ? `/blog/?post=${postSlug}&n=${i}` : null;
     const tagOpen  = blogHref
       ? `<a href="${blogHref}" class="e blog-card reveal">`
       : `<article class="e blog-card reveal" role="button" tabindex="0" data-idx="${i}">`;
