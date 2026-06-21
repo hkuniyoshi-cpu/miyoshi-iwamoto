@@ -2594,10 +2594,21 @@ function applyFeatures(items) {
   const grid = document.getElementById('featuresGrid');
   if (!grid || !items || !items.length) return;
   const enLabels = ['Pelvis','Training','Postnatal','EMS','Plan','LINE'];
+  const defaultImgs = [
+    '/images/feat-01.png',
+    '/images/feat-02.png',
+    '/images/feat-03.png',
+    '/images/feat-04.png',
+    '/images/feat-05.png',
+    '/images/feat-01.png',
+  ];
   grid.innerHTML = items.map((f, i) => {
     const num = String(i + 1).padStart(2, '0');
     const label = f.label || enLabels[i] || `Feature ${num}`;
-    const imgHtml = f.img ? `<div class="feat-img"><img src="${esc(driveImg(f.img))}" alt="" loading="lazy"></div>` : '<div class="feat-img"></div>';
+    const imgSrc = f.img ? driveImg(f.img) : (defaultImgs[i] || '');
+    const imgHtml = imgSrc
+      ? `<div class="feat-img"><img src="${esc(imgSrc)}" alt="" loading="lazy"></div>`
+      : '<div class="feat-img"></div>';
     return `
     <div class="feat-card">
       <span class="feat-label">${esc(label)}</span>
