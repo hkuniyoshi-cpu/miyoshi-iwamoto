@@ -2018,10 +2018,12 @@
       <div class="section-divider"></div>
     </div>
     <div class="access-inner">
-      <div class="access-map reveal">
+      <div class="access-map reveal" id="access-map">
         <iframe
-          src="https://maps.google.com/maps?q=%E5%BA%83%E5%B3%B6%E7%9C%8C%E4%B8%89%E6%AC%A1%E5%B8%82%E6%9D%B1%E9%85%92%E5%B1%8B%E7%94%BA381-2&output=embed"
+          src="https://www.google.com/maps/embed?pb=!1m14!1m8!1m3!1d6553.836123868944!2d132.876389!3d34.782838!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3550ebb4a3c8f1ab%3A0x2c1bb4b8cc2c89cb!2z5LiJ5qyh44GV44KP44KC44Go5o6l6aqo6Zmi!5e0!3m2!1sja!2sus!4v1782017760995!5m2!1sja!2sus"
           title="三次いわもと接骨院 地図"
+          width="600" height="450"
+          style="border:0;"
           loading="lazy"
           referrerpolicy="no-referrer-when-downgrade"
           allowfullscreen>
@@ -2613,6 +2615,17 @@ function applyAccess(access) {
   if (access.hoursHtml) {
     const tbl = document.getElementById('hours-table');
     if (tbl) tbl.innerHTML = access.hoursHtml;
+  }
+  if (access.mapEmbed) {
+    const wrap = document.getElementById('access-map');
+    if (wrap) {
+      const val = access.mapEmbed.trim();
+      if (val.startsWith('<iframe')) {
+        wrap.innerHTML = val;
+      } else {
+        wrap.innerHTML = `<iframe src="${esc(val)}" title="地図" width="600" height="450" style="border:0;" loading="lazy" referrerpolicy="no-referrer-when-downgrade" allowfullscreen></iframe>`;
+      }
+    }
   }
 }
 
