@@ -2441,14 +2441,17 @@ function fmtDate(s) {
 function driveImg(url) {
   if (!url) return '';
   const s = String(url).trim();
-  const m1 = s.match(/\/d\/([a-zA-Z0-9_-]+)/);
-  if (m1) return `https://drive.google.com/thumbnail?id=${m1[1]}&sz=w1200`;
-  const m2 = s.match(/lh3\.googleusercontent\.com\/d\/([a-zA-Z0-9_-]+)/);
-  if (m2) return `https://lh3.googleusercontent.com/d/${m2[1]}=w1200`;
-  if (s.indexOf('drive.google.com/thumbnail') !== -1) {
-    return s.replace(/[?&]sz=[^&]*/, '?sz=w1200');
-  }
-  return s;
+  // /d/FILE_ID 形式（view URL, thumbnail URL の /d/ はない）
+  const m1 = s.match(/\/d\/([a-zA-Z0-9_-]{20,})/);
+  if (m1) return `https://lh3.googleusercontent.com/d/${m1[1]}`;
+  // thumbnail?id=FILE_ID 形式
+  const m3 = s.match(/[?&]id=([a-zA-Z0-9_-]{20,})/);
+  if (m3) return `https://lh3.googleusercontent.com/d/${m3[1]}`;
+  // 既に lh3
+  const m2 = s.match(/lh3\.googleusercontent\.com\/d\/([a-zA-Z0-9_-]{20,})/);
+  if (m2) return `https://lh3.googleusercontent.com/d/${m2[1]}`;
+  if (s.startsWith('http')) return s;
+  return '';
 }
 function stars(n) {
   const s = Math.max(1, Math.min(5, parseInt(n, 10) || 5));
