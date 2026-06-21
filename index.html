@@ -1714,6 +1714,29 @@
       transition: background 0.25s ease, transform 0.2s ease;
     }
     .glove-btn:hover { background: #fbbf24; transform: translateY(-2px); color: #0c1820; }
+    /* Glove section images */
+    .glove-feature-img {
+      width: 100%;
+      max-height: 380px;
+      object-fit: cover;
+      border-radius: 4px;
+      display: block;
+      margin-bottom: 52px;
+      border: 1px solid rgba(234,179,8,0.15);
+    }
+    .glove-kodawari-img-wrap {
+      margin: -28px -24px 22px;
+      overflow: hidden;
+      border-radius: var(--r-lg) var(--r-lg) 0 0;
+    }
+    .glove-kodawari-img-wrap img {
+      width: 100%;
+      height: 160px;
+      object-fit: cover;
+      display: block;
+      transition: transform 0.4s ease;
+    }
+    .glove-kodawari-item:hover .glove-kodawari-img-wrap img { transform: scale(1.04); }
     @media (max-width: 900px) {
       .glove-products { grid-template-columns: 1fr; }
       .glove-kodawari { grid-template-columns: 1fr; }
@@ -2187,6 +2210,9 @@
       </div>
     </div>
 
+    <!-- Feature image -->
+    <img src="/images/glove-feature.jpeg" alt="Glove Studio Gan プレミアムグローブ" class="glove-feature-img reveal" loading="lazy">
+
     <!-- Products -->
     <p class="glove-products-label">LINEUP — 全モデル 60,500円（税込）</p>
     <div class="glove-products reveal-stagger">
@@ -2231,16 +2257,25 @@
     </div>
     <div class="glove-kodawari reveal-stagger">
       <div class="glove-kodawari-item">
+        <div class="glove-kodawari-img-wrap">
+          <img src="/images/glove-k01.jpeg" alt="型付け職人の手作業" loading="lazy">
+        </div>
         <p class="glove-kodawari-num">01</p>
         <h4 class="glove-kodawari-title">型付け職人による<br>型を「付けて」納品</h4>
         <p class="glove-kodawari-desc">製作者が自ら型を付けて納品するため「こうやって使って欲しい」が形となって手元に届きます。</p>
       </div>
       <div class="glove-kodawari-item">
+        <div class="glove-kodawari-img-wrap">
+          <img src="/images/glove-k02.jpeg" alt="運動学を意識した設計" loading="lazy">
+        </div>
         <p class="glove-kodawari-num">02</p>
         <h4 class="glove-kodawari-title">運動学を意識した設計</h4>
         <p class="glove-kodawari-desc">体の使い方、左右のバランス、送球への動作移行、捕球のしやすさなど、こだわって考え抜き、精巧な造りにしています。</p>
       </div>
       <div class="glove-kodawari-item">
+        <div class="glove-kodawari-img-wrap">
+          <img src="/images/glove-k03.jpeg" alt="ヒモを通し直す職人作業" loading="lazy">
+        </div>
         <p class="glove-kodawari-num">03</p>
         <h4 class="glove-kodawari-title">ヒモを通し直す</h4>
         <p class="glove-kodawari-desc">グラブが出来上がっても一度全てのヒモを抜き、再度1本1本通し直すため、革本来の動きを維持しながら選手個々の形に仕上がります。</p>
