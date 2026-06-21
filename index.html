@@ -101,7 +101,7 @@
 
     /* ===== Reset & Base ===== */
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
-    html { scroll-behavior: smooth; background: #0c1820; overflow-x: hidden; }
+    html { scroll-behavior: smooth; background: #0c1820; overflow-x: hidden; max-width: 100vw; }
     body {
       font-family: var(--font-body);
       background: var(--bg);
@@ -111,9 +111,10 @@
       -webkit-font-smoothing: antialiased;
       margin-left: var(--sidebar-w);
       word-break: auto-phrase;
+      overflow-x: hidden;
     }
     @media (max-width: 860px) {
-      body { margin-left: 0; padding-top: 60px; }
+      body { margin-left: 0 !important; padding-top: 60px; overflow-x: hidden; }
     }
     img { max-width: 100%; height: auto; display: block; }
     a { color: inherit; text-decoration: none; }
@@ -385,7 +386,8 @@
       color: var(--ink);
     }
     @media (max-width: 860px) {
-      body { margin-left: 0; padding-top: 52px; }
+      body { margin-left: 0 !important; padding-top: 52px; overflow-x: hidden; width: 100%; max-width: 100vw; }
+      section { padding-left: 0 !important; padding-right: 0 !important; }
       section[id] { scroll-margin-top: 52px; }
       #sidebar {
         width: 100%; height: 52px;
@@ -460,6 +462,7 @@
     }
     @media (max-width: 480px) {
       .sidebar-nav a { padding: 0 8px; }
+      .btn { white-space: normal !important; text-align: center; }
     }
 
     /* ===== MOBILE TABS (使用しない) ===== */
@@ -1591,8 +1594,9 @@
     .datsumou-peace-item .p-icon { font-size: 26px; margin-bottom: 8px; display: block; }
     .datsumou-peace-item .p-text { font-size: 12px; font-weight: 600; color: var(--ink); line-height: 1.5; }
     @media (max-width: 900px) {
-      .datsumou-lead { grid-template-columns: 1fr; gap: 36px; }
-      .datsumou-price-card { position: static; }
+      .datsumou-lead { display: block !important; }
+      .datsumou-lead > div { width: 100%; max-width: 100%; }
+      .datsumou-price-card { position: static !important; margin-top: 32px; max-width: 100%; box-sizing: border-box; }
       .datsumou-parts { grid-template-columns: 1fr 1fr; }
       .datsumou-peace { grid-template-columns: repeat(2, 1fr); }
     }
@@ -1606,6 +1610,8 @@
       background: #0f1a22;
       position: relative;
       overflow: hidden;
+      padding-left: 0;
+      padding-right: 0;
     }
     /* Catch copy banner */
     .glove-catch-block {
