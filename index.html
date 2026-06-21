@@ -287,10 +287,10 @@
       z-index: 900;
       display: flex;
       flex-direction: column;
-      padding: 48px 36px 150px;
+      padding: 48px 36px 0;
       border-right: 1px solid rgba(29,106,142,0.07);
       box-shadow: 2px 0 24px rgba(26,45,58,0.05);
-      overflow-y: auto;
+      overflow-y: hidden;
     }
     .sidebar-logo {
       display: block;
@@ -317,6 +317,9 @@
       display: flex;
       flex-direction: column;
       gap: 18px;
+      flex: 1;
+      overflow-y: auto;
+      padding-bottom: 20px;
     }
     .sidebar-nav a {
       font-size: 13px;
@@ -344,23 +347,14 @@
       vertical-align: middle;
     }
     .sidebar-bottom {
-      position: absolute;
-      bottom: 36px;
-      left: 36px;
-      right: 36px;
-      padding-top: 28px;
+      flex-shrink: 0;
+      padding: 28px 0 36px;
       display: flex;
       flex-direction: column;
       gap: 10px;
       border-top: 1px solid rgba(29,106,142,0.08);
       background: var(--white);
     }
-    #sidebar.at-footer .sidebar-bottom {
-      background: #0c1820;
-      border-top-color: rgba(255,255,255,0.06);
-    }
-    #sidebar.at-footer .sidebar-tel small { color: rgba(255,255,255,0.4); }
-    #sidebar.at-footer .sidebar-tel span { color: rgba(255,255,255,0.85); }
     .sidebar-tel {
       display: block;
       text-decoration: none;
@@ -1766,8 +1760,8 @@
 
     /* ===== Partner Notice ===== */
     .partner-notice {
-      background: #0c1820;
-      border-top: 1px solid rgba(255,255,255,0.06);
+      background: var(--bg);
+      border-top: 1px solid rgba(29,106,142,0.12);
       padding: 14px clamp(20px, 5vw, 80px);
       display: flex;
       align-items: center;
@@ -1781,19 +1775,19 @@
       font-family: var(--font-body);
       font-size: 0.68rem;
       letter-spacing: 0.06em;
-      color: rgba(255,255,255,0.3);
+      color: rgba(26,45,58,0.45);
       margin: 0;
     }
     .partner-notice a {
       font-family: var(--font-body);
       font-size: 0.68rem;
       letter-spacing: 0.08em;
-      color: rgba(29,106,142,0.65);
+      color: var(--accent);
       text-decoration: none;
       transition: color 0.3s ease;
       white-space: nowrap;
     }
-    .partner-notice a:hover { color: var(--accent-soft); }
+    .partner-notice a:hover { color: var(--ink); }
     @media (max-width: 860px) {
       .partner-notice { margin-left: 0; }
     }
@@ -2931,32 +2925,6 @@ fetch(GAS_URL)
   });
 
 
-/* ===== Sidebar clip at footer boundary (白い長方形対策) ===== */
-(function() {
-  function sync() {
-    var notice = document.querySelector('.partner-notice') || document.getElementById('footer');
-    var sidebar = document.getElementById('sidebar');
-    if (!sidebar || !notice) return;
-    var top = notice.getBoundingClientRect().top;
-    var vh = window.innerHeight;
-    if (top < vh) {
-      /* clip-path でフッター上端より下のサイドバーを切り取る → 白い長方形が見えなくなる */
-      var clipBottom = Math.max(0, vh - top);
-      sidebar.style.clipPath = 'inset(0 0 ' + clipBottom + 'px 0)';
-      sidebar.classList.add('at-footer');
-    } else {
-      sidebar.style.clipPath = '';
-      sidebar.classList.remove('at-footer');
-    }
-  }
-  window.addEventListener('scroll', sync, { passive: true });
-  window.addEventListener('load', sync);
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', sync);
-  } else {
-    sync();
-  }
-})();
 
 /* ===== FAQ accordion ===== */
 function initFAQ() {
