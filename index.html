@@ -2892,7 +2892,7 @@ function applyBlog(items) {
     const shortTitle = rawTitle.length > 60 ? rawTitle.slice(0, 60) + '…' : rawTitle;
     const slugMatch = (b.url || '').match(/\/blog\/([^\/\?#]+)/);
     const postSlug  = slugMatch ? slugMatch[1] : (b.date || '');
-    const blogHref  = postSlug ? `/blog/?post=${postSlug}&n=${i}` : null;
+    const blogHref  = postSlug ? `/blog/${postSlug}/` : null;
     const tagOpen  = blogHref
       ? `<a href="${blogHref}" class="e blog-card reveal">`
       : `<article class="e blog-card reveal" role="button" tabindex="0" data-idx="${i}">`;
