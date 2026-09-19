@@ -71,6 +71,62 @@
   }
   </script>
 
+  <!-- JSON-LD: MedicalWebPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "MedicalWebPage",
+    "inLanguage": "ja",
+    "name": "三次いわもと接骨院｜骨盤矯正・整体・産後矯正・楽トレ",
+    "url": "https://miyoshi-iwamoto.search-mania.net/",
+    "description": "広島県三次市の接骨院。骨盤矯正・整体・産後矯正・EMS楽トレによるインナーマッスル強化・スポーツ障害への対応まで、症状別ガイドと施術内容を解説。",
+    "primaryImageOfPage": {
+      "@type": "ImageObject",
+      "url": "https://miyoshi-iwamoto.search-mania.net/ogp.svg"
+    },
+    "about": [
+      { "@type": "MedicalCondition", "name": "骨盤の歪み" },
+      { "@type": "MedicalCondition", "name": "産後の骨盤矯正" },
+      { "@type": "MedicalCondition", "name": "慢性腰痛" },
+      { "@type": "MedicalCondition", "name": "肩こり" },
+      { "@type": "MedicalCondition", "name": "スポーツ障害" }
+    ],
+    "audience": {
+      "@type": "PeopleAudience",
+      "healthCondition": {
+        "@type": "MedicalCondition",
+        "name": "骨盤の歪み・慢性痛・産後のケア・スポーツ障害"
+      }
+    },
+    "lastReviewed": "2026-09-20"
+  }
+  </script>
+
+  <!-- JSON-LD: FAQPage -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "inLanguage": "ja",
+    "mainEntity": [
+      { "@type": "Question", "name": "初めてでも大丈夫ですか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "初回カウンセリングを丁寧に行います。体の状態や気になる症状をしっかりお伺いしてから施術に入りますので、はじめての方もご安心ください。" }},
+      { "@type": "Question", "name": "予約は必要ですか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "予約優先制です。LINEまたはお電話でご予約ください。当日のご予約もお気軽にどうぞ。" }},
+      { "@type": "Question", "name": "駐車場はありますか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "6台分の駐車スペースがございます（施設前・横）。お車でのご来院も安心です。" }},
+      { "@type": "Question", "name": "保険は使えますか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "急性外傷（骨折・捻挫・打撲等）は健康保険が適用されます。交通事故（自賠責）、労災・学校保険・個人賠償責任保険にも対応しています。" }},
+      { "@type": "Question", "name": "産後矯正はいつから始められますか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "産後1〜2ヶ月が目安です。産婦人科でOKが出てからご来院ください。帝王切開の方は3〜6ヶ月以降のスタートが安心です。" }},
+      { "@type": "Question", "name": "楽トレ（EMS）とは何ですか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "楽トレは、寝たままの状態で電気刺激により深層筋（インナーマッスル）を鍛える最新のEMSトレーニングです。1回23分×週1〜2回のペースで、腹筋約9,000回分の運動効果に相当すると言われています。" }},
+      { "@type": "Question", "name": "骨盤矯正はどのくらいの期間通えば効果が出ますか？",
+        "acceptedAnswer": { "@type": "Answer", "text": "個人差はありますが、週1〜2回のペースで1〜3ヶ月の継続をおすすめしています。姿勢の改善、慢性痛の軽減、体の軽さを実感される方が多いです。" }}
+    ]
+  }
+  </script>
+
   <style>
     /* ===== CSS Variables ===== */
     :root {
@@ -1933,6 +1989,38 @@
     @keyframes ld-pulse { 0%,100% { transform:scale(1) rotate(0); } 50% { transform:scale(1.04) rotate(1.5deg); } }
     @keyframes ld-rise { from { opacity:0; transform:translateY(10px); } to { opacity:1; transform:translateY(0); } }
     @keyframes ld-bounce { 0%,80%,100% { transform:translateY(0); opacity:.35; } 40% { transform:translateY(-9px); opacity:1; } }
+
+    /* ===== TOC (目次) ===== */
+    #toc { padding: 60px 0; background: var(--bg); }
+    .toc-nav { margin-top: 32px; background: var(--white); border-radius: var(--r-lg); padding: 32px 40px; box-shadow: var(--shadow-sm); border-left: 4px solid var(--accent); }
+    .toc-list { list-style: none; padding: 0; margin: 0; counter-reset: toc; column-count: 2; column-gap: 40px; }
+    .toc-list li { counter-increment: toc; padding: 10px 0; border-bottom: 1px dashed rgba(29,106,142,0.15); font-size: 15px; break-inside: avoid; }
+    .toc-list li::before { content: counter(toc, decimal-leading-zero) "."; color: var(--accent); font-weight: 700; margin-right: 10px; font-family: var(--font-display); }
+    .toc-list a { color: var(--ink); text-decoration: none; transition: color .2s; }
+    .toc-list a:hover { color: var(--accent); text-decoration: underline; text-underline-offset: 4px; }
+    @media (max-width: 768px) {
+      .toc-nav { padding: 24px 20px; }
+      .toc-list { column-count: 1; }
+    }
+
+    /* ===== Symptoms Guide (記事風) ===== */
+    #symptoms-guide { padding: 80px 0; background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%); }
+    .guide-article { background: var(--white); border-radius: var(--r-lg); padding: 40px 48px; margin-top: 32px; box-shadow: var(--shadow-sm); scroll-margin-top: 80px; }
+    .guide-article + .guide-article { margin-top: 24px; }
+    .guide-heading { font-family: var(--font-display); font-size: clamp(20px, 2.4vw, 26px); color: var(--ink); margin: 0 0 20px; padding-bottom: 16px; border-bottom: 2px solid var(--accent-faded); line-height: 1.5; }
+    .guide-subheading { font-family: var(--font-display); font-size: 17px; color: var(--accent); margin: 28px 0 12px; display: flex; align-items: center; gap: 10px; }
+    .guide-subheading::before { content: ""; width: 4px; height: 20px; background: var(--accent); border-radius: 2px; }
+    .guide-lead { font-size: 15px; line-height: 1.9; color: var(--ink-soft); margin: 0 0 8px; }
+    .guide-lead strong { color: var(--accent); font-weight: 700; }
+    .guide-article p { font-size: 15px; line-height: 1.9; color: var(--ink-soft); margin: 8px 0; }
+    .guide-article strong { color: var(--ink); font-weight: 600; }
+    .guide-list { list-style: none; padding: 0; margin: 8px 0 16px; }
+    .guide-list li { position: relative; padding: 6px 0 6px 26px; font-size: 15px; line-height: 1.7; color: var(--ink-soft); }
+    .guide-list li::before { content: "✓"; position: absolute; left: 0; top: 6px; color: var(--accent); font-weight: 700; }
+    @media (max-width: 768px) {
+      #symptoms-guide { padding: 60px 0; }
+      .guide-article { padding: 28px 20px; }
+    }
   </style>
 </head>
 <body>
@@ -2031,6 +2119,118 @@
         <p id="director-message">「体の痛みや不調は、我慢しないでください。骨盤や背骨のゆがみを整えることで、多くの症状が改善できます。初回は丁寧なカウンセリングからスタートしますので、まずはお気軽にご来院ください。皆様の笑顔のために、精一杯サポートいたします。」</p>
       </div>
     </div>
+  </div>
+</section>
+
+<!-- ===== TABLE OF CONTENTS ===== -->
+<section id="toc" aria-label="このページの目次">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;">
+      <span class="section-label">CONTENTS</span>
+      <h2 class="section-title">このページでわかること</h2>
+      <div class="section-divider" style="margin: 20px auto 0;"></div>
+    </div>
+    <nav class="toc-nav reveal" aria-label="目次">
+      <ol class="toc-list">
+        <li><a href="#about">三次いわもと接骨院とは</a></li>
+        <li><a href="#guide-pelvis">骨盤の歪み・骨盤矯正</a></li>
+        <li><a href="#guide-postpartum">産後の骨盤矯正</a></li>
+        <li><a href="#guide-ems">楽トレ（EMS）とは</a></li>
+        <li><a href="#guide-sports">スポーツ障害・慢性痛</a></li>
+        <li><a href="#menu">施術メニュー・料金</a></li>
+        <li><a href="#datsumou">セルフ脱毛サービス</a></li>
+        <li><a href="#features">6つのこだわり</a></li>
+        <li><a href="#reviews">患者様の声・クチコミ</a></li>
+        <li><a href="#access">アクセス・営業時間</a></li>
+        <li><a href="#faq">よくあるご質問</a></li>
+        <li><a href="#reservation">ご予約・お問い合わせ</a></li>
+      </ol>
+    </nav>
+  </div>
+</section>
+
+<!-- ===== SYMPTOMS GUIDE (記事風) ===== -->
+<section id="symptoms-guide" aria-label="症状別ガイド">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;">
+      <span class="section-label">GUIDE</span>
+      <h2 class="section-title">症状別・お悩みガイド</h2>
+      <div class="section-divider" style="margin: 20px auto 0;"></div>
+      <p class="section-lead">三次いわもと接骨院で対応している主な症状と、施術内容・期待できる効果・目安期間を解説します。ご自身のお悩みに近い項目からお読みください。</p>
+    </div>
+
+    <article class="guide-article reveal" id="guide-pelvis">
+      <h3 class="guide-heading">1. 骨盤の歪み・骨盤矯正について</h3>
+      <p class="guide-lead"><strong>骨盤の歪み</strong>とは、日常の姿勢のクセ・出産・運動不足などにより、骨盤が本来の位置からズレてしまう状態を指します。腰痛・肩こり・下半身太り・生理不順など、さまざまな不調の原因になることがあります。</p>
+
+      <h4 class="guide-subheading">こんな症状にお心当たりありませんか？</h4>
+      <ul class="guide-list">
+        <li>慢性的な腰痛・肩こりがある</li>
+        <li>左右の脚の長さが違う感覚がある</li>
+        <li>下半身が太りやすい・むくみやすい</li>
+        <li>姿勢が悪いと言われる</li>
+        <li>生理痛・冷え性が悪化している</li>
+      </ul>
+
+      <h4 class="guide-subheading">当院での施術内容</h4>
+      <p>初回に姿勢分析と検査を行い、原因を特定してから施術に入ります。ソフトな手技で骨盤の位置を整え、周辺の筋肉のバランスも同時に調整します。強い痛みが苦手な方には、無理のない施術方法をご提案しますのでご安心ください。</p>
+
+      <h4 class="guide-subheading">期待できる効果と通院目安</h4>
+      <p>個人差はありますが、<strong>週1〜2回のペースで1〜3ヶ月</strong>の継続をおすすめしています。姿勢の改善、慢性痛の軽減、体の軽さを実感される方が多いです。定期的なメンテナンス通院で、良い状態を維持できます。</p>
+    </article>
+
+    <article class="guide-article reveal" id="guide-postpartum">
+      <h3 class="guide-heading">2. 産後の骨盤矯正について</h3>
+      <p class="guide-lead">出産時、赤ちゃんが産道を通るために骨盤は大きく開きます。<strong>産後6ヶ月ほどかけて自然に閉じていきますが、生活習慣や育児姿勢によっては歪んだまま固まってしまう</strong>ことがあります。</p>
+
+      <h4 class="guide-subheading">産後矯正が必要な理由</h4>
+      <ul class="guide-list">
+        <li>骨盤が開いたままだと、下半身太り・尿もれ・腰痛の原因に</li>
+        <li>骨盤底筋の低下により内臓下垂・ぽっこりお腹が起こりやすい</li>
+        <li>抱っこ・授乳姿勢による肩こり・背中の痛みが慢性化しやすい</li>
+      </ul>
+
+      <h4 class="guide-subheading">開始時期の目安</h4>
+      <p><strong>産後1〜2ヶ月経過後</strong>が開始の目安です。産婦人科での1ヶ月健診で問題がなければ開始できます。帝王切開の方は、傷の状態を見ながら3〜6ヶ月以降のスタートが安心です。</p>
+
+      <h4 class="guide-subheading">お子様連れも安心してお越しいただけます</h4>
+      <p>ベビーカーでの入店・キッズスペースのご用意など、育児中のママでも通いやすい環境を整えています。まずはお気軽にご相談ください。</p>
+    </article>
+
+    <article class="guide-article reveal" id="guide-ems">
+      <h3 class="guide-heading">3. EMS「楽トレ」で鍛えるインナーマッスル</h3>
+      <p class="guide-lead"><strong>楽トレ</strong>は、寝たままの状態で電気刺激により深層筋（インナーマッスル）を鍛える最新のEMSトレーニングです。通常の運動では鍛えにくい体幹深部を、効率的にアプローチできます。</p>
+
+      <h4 class="guide-subheading">こんな方におすすめ</h4>
+      <ul class="guide-list">
+        <li>運動する時間がとれない方</li>
+        <li>ダイエットしても効果を感じにくい方</li>
+        <li>ぽっこりお腹・姿勢の悪化が気になる方</li>
+        <li>膝や腰への負担なく体を鍛えたい方</li>
+        <li>高齢で転倒予防・筋力維持をしたい方</li>
+      </ul>
+
+      <h4 class="guide-subheading">1回の施術の流れ</h4>
+      <p>専用パッドを腹部・背中・脚などに装着し、寝転がった状態で電気刺激を送ります。<strong>1回23分×週1〜2回</strong>のペースで、腹筋約9,000回分の運動効果に相当すると言われています。運動が苦手な方でも、寝ているだけで体幹が鍛えられます。</p>
+    </article>
+
+    <article class="guide-article reveal" id="guide-sports">
+      <h3 class="guide-heading">4. スポーツ障害・慢性痛への対応</h3>
+      <p class="guide-lead">院長・岩本はスポーツ選手のケアにも長く携わってきました。<strong>現役選手のパフォーマンス向上から、慢性痛にお困りの一般の方まで</strong>、幅広く対応しています。</p>
+
+      <h4 class="guide-subheading">対応する主な症状</h4>
+      <ul class="guide-list">
+        <li>肩・肘・膝・腰の使いすぎによる痛み（オーバーユース障害）</li>
+        <li>捻挫・打撲・肉離れなどの急性外傷</li>
+        <li>試合前のコンディショニング調整</li>
+        <li>復帰後のリハビリ・再発予防</li>
+        <li>デスクワークによる肩こり・眼精疲労</li>
+      </ul>
+
+      <h4 class="guide-subheading">保険適用について</h4>
+      <p><strong>急性外傷（骨折・脱臼・捻挫・打撲・挫傷）は健康保険が適用</strong>されます。交通事故（自賠責）、労災、学校保険、個人賠償責任保険にも対応しています。適用可否に迷った際は、お気軽にご相談ください。</p>
+    </article>
+
   </div>
 </section>
 
@@ -2542,6 +2742,22 @@
           <span class="arrow">▼</span>
         </div>
         <div class="faq-a">産後1〜2ヶ月が目安です。産婦人科でOKが出てからご来院ください。産後の骨盤ケアは早期に始めるほど効果的です。</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">
+          <span class="q-badge">Q</span>
+          <span>楽トレ（EMS）とは何ですか？</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">楽トレは、寝たままの状態で電気刺激により深層筋（インナーマッスル）を鍛える最新のEMSトレーニングです。1回23分×週1〜2回のペースで、腹筋約9,000回分の運動効果に相当すると言われています。運動が苦手な方でも寝ているだけで体幹が鍛えられます。</div>
+      </div>
+      <div class="faq-item reveal">
+        <div class="faq-q" tabindex="0" role="button" aria-expanded="false">
+          <span class="q-badge">Q</span>
+          <span>骨盤矯正はどのくらいの期間通えば効果が出ますか？</span>
+          <span class="arrow">▼</span>
+        </div>
+        <div class="faq-a">個人差はありますが、週1〜2回のペースで1〜3ヶ月の継続をおすすめしています。姿勢の改善、慢性痛の軽減、体の軽さを実感される方が多いです。良い状態を維持するため、定期的なメンテナンス通院もおすすめです。</div>
       </div>
       <div class="faq-item reveal">
         <div class="faq-q" tabindex="0" role="button" aria-expanded="false">
