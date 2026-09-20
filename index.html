@@ -3335,7 +3335,14 @@ document.addEventListener('DOMContentLoaded', () => {
       const link = document.querySelector(`.sidebar-nav a[href="#${id}"]`);
       if (link) {
         link.classList.add('active');
-        link.scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        const nav = link.closest('.sidebar-nav');
+        if (nav) {
+          const linkRect = link.getBoundingClientRect();
+          const navRect = nav.getBoundingClientRect();
+          if (linkRect.top < navRect.top || linkRect.bottom > navRect.bottom) {
+            nav.scrollTo({ top: link.offsetTop - nav.clientHeight / 2 + link.offsetHeight / 2, behavior: 'smooth' });
+          }
+        }
       }
     });
   }, { rootMargin: '-20% 0px -60% 0px', threshold: 0 });
