@@ -1992,7 +1992,7 @@
 
     /* ===== TOC (目次) ===== */
     #toc { padding: 60px 0; background: var(--bg); }
-    .toc-nav { margin-top: 32px; background: var(--white); border-radius: var(--r-lg); padding: 32px 40px; box-shadow: var(--shadow-sm); border-left: 4px solid var(--accent); }
+    .toc-nav { max-width: 880px; margin: 32px auto 0; background: var(--white); border-radius: var(--r-lg); padding: 32px 40px; box-shadow: var(--shadow-sm); border-left: 4px solid var(--accent); }
     .toc-list { list-style: none; padding: 0; margin: 0; counter-reset: toc; column-count: 2; column-gap: 40px; }
     .toc-list li { counter-increment: toc; padding: 10px 0; border-bottom: 1px dashed rgba(29,106,142,0.15); font-size: 15px; break-inside: avoid; }
     .toc-list li::before { content: counter(toc, decimal-leading-zero) "."; color: var(--accent); font-weight: 700; margin-right: 10px; font-family: var(--font-display); }
@@ -2005,7 +2005,7 @@
 
     /* ===== Symptoms Guide (記事風) ===== */
     #symptoms-guide { padding: 80px 0; background: linear-gradient(180deg, var(--bg) 0%, var(--bg-2) 100%); }
-    .guide-article { background: var(--white); border-radius: var(--r-lg); padding: 40px 48px; margin-top: 32px; box-shadow: var(--shadow-sm); scroll-margin-top: 80px; }
+    .guide-article { max-width: 880px; margin-left: auto; margin-right: auto; background: var(--white); border-radius: var(--r-lg); padding: 40px 48px; margin-top: 32px; box-shadow: var(--shadow-sm); scroll-margin-top: 80px; border-top: 3px solid var(--accent); }
     .guide-article + .guide-article { margin-top: 24px; }
     .guide-heading { font-family: var(--font-display); font-size: clamp(20px, 2.4vw, 26px); color: var(--ink); margin: 0 0 20px; padding-bottom: 16px; border-bottom: 2px solid var(--accent-faded); line-height: 1.5; }
     .guide-subheading { font-family: var(--font-display); font-size: 17px; color: var(--accent); margin: 28px 0 12px; display: flex; align-items: center; gap: 10px; }
@@ -2156,7 +2156,7 @@
       <span class="section-label">GUIDE</span>
       <h2 class="section-title">症状別・お悩みガイド</h2>
       <div class="section-divider" style="margin: 20px auto 0;"></div>
-      <p class="section-lead">三次いわもと接骨院で対応している主な症状と、施術内容・期待できる効果・目安期間を解説します。ご自身のお悩みに近い項目からお読みください。</p>
+      <p class="section-lead" style="max-width:640px;margin:24px auto 0;">三次いわもと接骨院で対応している主な症状と、施術内容・期待できる効果・目安期間を解説します。ご自身のお悩みに近い項目からお読みください。</p>
     </div>
 
     <article class="guide-article reveal" id="guide-pelvis">
