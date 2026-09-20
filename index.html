@@ -2082,9 +2082,9 @@
 <section id="hero" aria-label="ヒーロー">
   <div class="hero-visual">
     <div class="hero-grid" id="h-photos" aria-hidden="true">
-      <div class="cell cms-loading" data-idx="0"></div>
-      <div class="cell cms-loading" data-idx="1"></div>
-      <div class="cell cms-loading" data-idx="2"></div>
+      <div class="cell" data-idx="0"><img src="https://lh3.googleusercontent.com/d/1fZ-IfE1Y6fICIYPbTjDJKwhY-_cmYDcQ=w1600" alt="院長と患者様" loading="eager"></div>
+      <div class="cell" data-idx="1"><img src="https://lh3.googleusercontent.com/d/1EB3v0FRYkyi_ffcpNym1YTZS0XZ7zhsl=w1600" alt="骨盤矯正の施術" loading="lazy"></div>
+      <div class="cell" data-idx="2"><img src="https://lh3.googleusercontent.com/d/1Htv6UjuywElOePNfpWK1YQdOoDYtqB7o=w1600" alt="筋膜リリース施術" loading="lazy"></div>
     </div>
     <span class="hero-vert-label" aria-hidden="true">接 骨 院</span>
   </div>
@@ -2971,6 +2971,7 @@ function applyHero(hero) {
       img.src = driveImg(imgs[i]);
       img.alt = photos[i] ? esc(photos[i].caption || '') : '';
       img.loading = 'lazy';
+      cell.innerHTML = '';
       cell.appendChild(img);
     }
   });
