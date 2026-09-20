@@ -130,6 +130,16 @@ function renderPost(post, slug) {
   };
   if (imgUrl) jsonLd.image = imgUrl;
 
+  const breadcrumbLd = {
+    '@context': 'https://schema.org',
+    '@type': 'BreadcrumbList',
+    'itemListElement': [
+      { '@type': 'ListItem', 'position': 1, 'name': STORE_NAME, 'item': SITE_URL + '/' },
+      { '@type': 'ListItem', 'position': 2, 'name': 'お知らせ',     'item': SITE_URL + '/blog/' },
+      { '@type': 'ListItem', 'position': 3, 'name': title,         'item': canonical }
+    ]
+  };
+
   return `<!DOCTYPE html>
 <html lang="ja">
 <head>
@@ -186,6 +196,9 @@ h1{margin:14px 0 28px;font-size:22px;line-height:1.7;font-weight:600;font-family
 <script type="application/ld+json">
 ${JSON.stringify(jsonLd)}
 </script>
+<script type="application/ld+json">
+${JSON.stringify(breadcrumbLd)}
+</script>
 </head>
 <body>
 
@@ -196,7 +209,7 @@ ${JSON.stringify(jsonLd)}
     ${imgUrl ? `<img src="${esc(imgUrl)}" alt="${esc(title)}" loading="eager">` : ''}
     <div class="card-body">
       ${date ? `<span class="date">${esc(dateFmt)}</span>` : ''}
-      ${post.title && String(post.title).trim() ? `<h1>${esc(post.title)}</h1>` : ''}
+      <h1>${esc(title)}</h1>
       <p class="text">${esc(bodyRaw)}</p>
     </div>
   </article>
